@@ -34,9 +34,6 @@ if __name__ == "__main__":
 
     input_example = X_train.head(5)
 
-    # ⛔ JANGAN set_experiment
-    # ⛔ JANGAN start_run
-
     mlflow.log_params({
         "solver": solver,
         "penalty": penalty,
@@ -95,3 +92,4 @@ if __name__ == "__main__":
         artifact_path="model",
         input_example=input_example
     )
+
