@@ -9,12 +9,12 @@ entry_points:
       penalty: {type: string, default: "l2"}
       max_iter: {type: int, default: 2000}
       C: {type: float, default: 29.763514416313193}
-      X_train: {type: string, default: "preprocessing/telco_churn_preprocessing/X_train.csv"}
-      X_test: {type: string, default: "preprocessing/telco_churn_preprocessing/X_test.csv"}
-      y_train: {type: string, default: "preprocessing/telco_churn_preprocessing/y_train.csv"}
-      y_test: {type: string, default: "preprocessing/telco_churn_preprocessing/y_test.csv"}
+      X_train: {type: string, default: "telco_churn_preprocessing/X_train.csv"}
+      X_test: {type: string, default: "telco_churn_preprocessing/X_test.csv"}
+      y_train: {type: string, default: "telco_churn_preprocessing/y_train.csv"}
+      y_test: {type: string, default: "telco_churn_preprocessing/y_test.csv"}
     command: >
-      python MLProject/modeling.py
+      python modeling.py
       {X_train}
       {X_test}
       {y_train}
