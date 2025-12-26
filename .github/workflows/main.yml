@@ -31,16 +31,7 @@ jobs:
       # 4. Run MLflow Project
       - name: Run MLflow Project
         run: |
-          mlflow run MLProject \
-            -P solver=liblinear \
-            -P penalty=l2 \
-            -P max_iter=2000 \
-            -P C=29.763514416313193 \
-            -P X_train=telco_churn_preprocessing/X_train.csv \
-            -P X_test=telco_churn_preprocessing/X_test.csv \
-            -P y_train=telco_churn_preprocessing/y_train.csv \
-            -P y_test=telco_churn_preprocessing/y_test.csv \
-            --env-manager=local
+          mlflow run MLProject --env-manager=local
 
       # 5. Optional: save mlruns folder back to repo
       - name: Save MLruns
