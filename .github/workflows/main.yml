@@ -2,43 +2,29 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   run-mlflow-project:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
       - uses: actions/checkout@v3
 
-      # 2. Set up Python
-      - name: Set up Python 3.12
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
-      # 3. Install dependencies (MLflow + dependencies)
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install mlflow scikit-learn pandas matplotlib numpy
 
-      # 4. Run MLflow Project
+      - name: Set MLflow tracking directory
+        run: |
+          echo "MLFLOW_TRACKING_URI=file:$(pwd)/MLProject/mlruns" >> $GITHUB_ENV
+
       - name: Run MLflow Project
         run: |
-          mlflow run MLProject --env-manager=local
-
-      # 5. Optional: save mlruns folder back to repo
-      - name: Save MLruns
-        run: |
-          git config --global user.name "${{ secrets.GITHUB_USERNAME }}"
-          git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
-          git add MLProject/mlruns/
-          git commit -m "Add MLflow run artifacts from CI"
-          git push origin main
-        if: success()
+          mlflow run ./MLProject --no-conda
