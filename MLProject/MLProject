@@ -1,0 +1,25 @@
+name: telco-churn-best-params
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      solver: {type: string, default: "liblinear"}
+      penalty: {type: string, default: "l2"}
+      max_iter: {type: int, default: 2000}
+      C: {type: float, default: 29.763514416313193}
+      X_train: {type: string, default: "preprocessing/telco_churn_preprocessing/X_train.csv"}
+      X_test: {type: string, default: "preprocessing/telco_churn_preprocessing/X_test.csv"}
+      y_train: {type: string, default: "preprocessing/telco_churn_preprocessing/y_train.csv"}
+      y_test: {type: string, default: "preprocessing/telco_churn_preprocessing/y_test.csv"}
+    command: >
+      python modelling.py
+      {X_train}
+      {X_test}
+      {y_train}
+      {y_test}
+      {max_iter}
+      {solver}
+      {penalty}
+      {C}
