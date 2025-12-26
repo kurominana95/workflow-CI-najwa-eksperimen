@@ -14,7 +14,7 @@ entry_points:
       y_train: {type: string, default: "preprocessing/telco_churn_preprocessing/y_train.csv"}
       y_test: {type: string, default: "preprocessing/telco_churn_preprocessing/y_test.csv"}
     command: >
-      python modelling.py
+      python MLProject/modeling.py
       {X_train}
       {X_test}
       {y_train}
