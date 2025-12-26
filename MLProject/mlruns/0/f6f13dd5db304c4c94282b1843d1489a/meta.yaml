@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/workflow-CI-najwa-eksperimen/workflow-CI-najwa-eksperimen/MLProject/mlruns/0/f6f13dd5db304c4c94282b1843d1489a/artifacts
+end_time: 1766733386917
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f6f13dd5db304c4c94282b1843d1489a
+run_name: thundering-yak-948
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766733380464
+status: 3
+tags: []
+user_id: runner

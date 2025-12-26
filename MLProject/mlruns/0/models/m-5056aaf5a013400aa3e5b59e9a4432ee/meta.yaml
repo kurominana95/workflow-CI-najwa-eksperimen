@@ -1,0 +1,10 @@
+artifact_location: file:///home/runner/work/workflow-CI-najwa-eksperimen/workflow-CI-najwa-eksperimen/MLProject/mlruns/0/models/m-5056aaf5a013400aa3e5b59e9a4432ee/artifacts
+creation_timestamp: 1766733384053
+experiment_id: '0'
+last_updated_timestamp: 1766733386628
+model_id: m-5056aaf5a013400aa3e5b59e9a4432ee
+model_type: null
+name: model
+source_run_id: f6f13dd5db304c4c94282b1843d1489a
+status: 2
+status_message: null
