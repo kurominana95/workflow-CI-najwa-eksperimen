@@ -9,21 +9,14 @@ import warnings
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
-    accuracy_score,
-    f1_score,
-    precision_score,
-    recall_score,
-    roc_auc_score,
-    confusion_matrix
+    accuracy_score, f1_score, precision_score,
+    recall_score, roc_auc_score, confusion_matrix
 )
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
     np.random.seed(42)
 
-    # ==========================
-    # Arguments from MLproject
-    # ==========================
     X_train_path = sys.argv[1]
     X_test_path  = sys.argv[2]
     y_train_path = sys.argv[3]
@@ -34,9 +27,6 @@ if __name__ == "__main__":
     penalty  = sys.argv[7]
     C        = float(sys.argv[8])
 
-    # ==========================
-    # Load data
-    # ==========================
     X_train = pd.read_csv(X_train_path)
     X_test  = pd.read_csv(X_test_path)
     y_train = pd.read_csv(y_train_path).values.ravel()
@@ -44,14 +34,9 @@ if __name__ == "__main__":
 
     input_example = X_train.head(5)
 
-    # ==========================
-    # Experiment (AMAN dengan mlflow run)
-    # ==========================
-    mlflow.set_experiment("Telco Churn - Logistic Regression Best Params")
+    # ⛔ JANGAN set_experiment
+    # ⛔ JANGAN start_run
 
-    # ==========================
-    # Log parameters
-    # ==========================
     mlflow.log_params({
         "solver": solver,
         "penalty": penalty,
@@ -59,9 +44,6 @@ if __name__ == "__main__":
         "C": C
     })
 
-    # ==========================
-    # Train model
-    # ==========================
     model = LogisticRegression(
         solver=solver,
         penalty=penalty,
@@ -71,9 +53,6 @@ if __name__ == "__main__":
     )
     model.fit(X_train, y_train)
 
-    # ==========================
-    # Evaluation
-    # ==========================
     y_pred  = model.predict(X_test)
     y_proba = model.predict_proba(X_test)[:, 1]
 
@@ -87,9 +66,6 @@ if __name__ == "__main__":
 
     mlflow.log_metrics(metrics)
 
-    # ==========================
-    # Confusion matrix artifact
-    # ==========================
     cm = confusion_matrix(y_test, y_pred)
     fig, ax = plt.subplots()
     ax.matshow(cm, cmap=plt.cm.Blues)
@@ -98,39 +74,24 @@ if __name__ == "__main__":
         for j in range(cm.shape[1]):
             ax.text(j, i, cm[i, j], ha="center", va="center")
 
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    plt.title("Confusion Matrix")
-
     plt.savefig("confusion_matrix.png")
     plt.close()
     mlflow.log_artifact("confusion_matrix.png")
 
-    # ==========================
-    # Prediction artifact
-    # ==========================
-    pred_df = pd.DataFrame({
+    pd.DataFrame({
         "y_true": y_test,
         "y_pred": y_pred,
         "y_proba": y_proba
-    })
-    pred_df.to_csv("predictions.csv", index=False)
+    }).to_csv("predictions.csv", index=False)
+
     mlflow.log_artifact("predictions.csv")
 
-    # ==========================
-    # Metrics JSON artifact
-    # ==========================
     with open("metrics.json", "w") as f:
         json.dump(metrics, f, indent=4)
     mlflow.log_artifact("metrics.json")
 
-    # ==========================
-    # Log model
-    # ==========================
     mlflow.sklearn.log_model(
         model,
         artifact_path="model",
         input_example=input_example
     )
-
-    
