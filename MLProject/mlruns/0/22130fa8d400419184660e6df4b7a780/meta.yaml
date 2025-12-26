@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/workflow-CI-najwa-eksperimen/workflow-CI-najwa-eksperimen/MLProject/mlruns/0/22130fa8d400419184660e6df4b7a780/artifacts
+end_time: 1766735119530
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 22130fa8d400419184660e6df4b7a780
+run_name: beautiful-pug-126
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766735113759
+status: 3
+tags: []
+user_id: runner
