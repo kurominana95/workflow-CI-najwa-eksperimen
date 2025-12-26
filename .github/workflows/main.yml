@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -21,10 +22,20 @@ jobs:
           pip install --upgrade pip
           pip install mlflow scikit-learn pandas matplotlib numpy
 
-      - name: Set MLflow tracking directory
+      # INI KUNCI → tracking ke folder repo
+      - name: Set MLflow tracking URI
         run: |
           echo "MLFLOW_TRACKING_URI=file:$(pwd)/MLProject/mlruns" >> $GITHUB_ENV
 
       - name: Run MLflow Project
         run: |
           mlflow run ./MLProject --env-manager=local
+
+      # PAKSA SIMPAN KE REPO
+      - name: Commit MLflow results to repo
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add MLProject/mlruns
+          git commit -m "Add MLflow artifacts and metrics from CI" || echo "No changes to commit"
+          git push
