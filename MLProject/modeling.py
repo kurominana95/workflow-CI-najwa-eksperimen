@@ -17,10 +17,10 @@ if __name__ == "__main__":
     # ==========================
     # File path dataset
     # ==========================
-    X_train_path = sys.argv[1] if len(sys.argv) > 1 else "preprocessing/telco_churn_preprocessing/X_train.csv"
-    X_test_path  = sys.argv[2] if len(sys.argv) > 2 else "preprocessing/telco_churn_preprocessing/X_test.csv"
-    y_train_path = sys.argv[3] if len(sys.argv) > 3 else "preprocessing/telco_churn_preprocessing/y_train.csv"
-    y_test_path  = sys.argv[4] if len(sys.argv) > 4 else "preprocessing/telco_churn_preprocessing/y_test.csv"
+    X_train_path = sys.argv[1] if len(sys.argv) > 1 else "telco_churn_preprocessing/X_train.csv"
+    X_test_path  = sys.argv[2] if len(sys.argv) > 2 else "telco_churn_preprocessing/X_test.csv"
+    y_train_path = sys.argv[3] if len(sys.argv) > 3 else "telco_churn_preprocessing/y_train.csv"
+    y_test_path  = sys.argv[4] if len(sys.argv) > 4 else "telco_churn_preprocessing/y_test.csv"
 
     # Load dataset
     X_train = pd.read_csv(X_train_path)
@@ -101,3 +101,4 @@ if __name__ == "__main__":
         mlflow.log_artifact(cm_path)
         mlflow.log_artifact(pred_path)
         mlflow.log_artifact(json_path)
+
